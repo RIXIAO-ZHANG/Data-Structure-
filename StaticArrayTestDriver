@@ -1,0 +1,327 @@
+// Programmer: Rixiao Zhang
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+#include "StaticArray.h"
+#include "StaticArray.h"		// ifndef test
+#include <cassert>
+
+
+
+
+int main()
+{
+
+	cout << "Programmer: Rixiao Zhang" << endl;
+
+
+	// test for type integer
+	StaticArray<int, 100> int_array;
+	cout << "Test for type integer" << endl;
+
+	// Test for capacity 
+	cout << "\nTesting StaticArray<V,CAP>::capacity()\n";
+	cout << "EXPECTED: 100\n";
+	cout << "ACTUAL: " << int_array.capacity() << endl;
+	assert(100 == int_array.capacity());
+	cout << "PAST" << endl;
+
+
+	// Test for the default constructor
+	cout << "\nTesting StaticArray<V,CAP>::StaticArray()\n";
+	for (int i = 0; i < int_array.capacity(); i++)
+	{
+		assert(int_array[i] == int());
+	}
+	cout << "PAST" << endl;
+
+
+	//Test for the setter function
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] setter\n";
+	int_array[5] = 100;
+	int_array[98] = 12345;
+	cout << "Expected:100 for int_array[5]" << endl;
+	cout << "Actual: " << int_array[5] << endl;
+	assert(int_array[5] == 100);
+	cout << "PAST" << endl;
+
+
+	cout << "Expected:12345 for int_array[98]" << endl;
+	cout << "Actual: " << int_array[98] << endl;
+	assert(int_array[98] == 12345);
+	cout << "PAST" << endl;
+
+
+	int_array[-1000] = 9999;
+	cout << "Expected 9999 for int_array[-1000]" << endl;
+	cout << "Actual: " << int_array[-1000] << endl;
+	cout << "PAST" << endl;
+
+	assert(int_array[-3] == 9999);			//checks out-of-range uses dummy. 
+	cout << "PAST" << endl;
+	assert(int_array[100] == 9999);			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(int_array[99] != 9999);			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(int_array[0] != 9999);				//checks lower end of range
+	cout << "PAST" << endl;
+
+
+	//Test for the getter function 
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] getter\n";
+	const StaticArray<int, 100> i_array = int_array;
+	for ( int i = 0; i < int_array.capacity(); i++)
+	{
+		assert( int_array[i] == i_array[i]);
+	}
+	cout << "PAST" << endl;
+
+
+	//Test for const boject
+	cout << "\nConst object test\n";
+	const StaticArray<int, 100> c;
+	assert(c.capacity());
+	assert(c[0] == c[0]);
+	assert(c[-1] == c[-1]);
+	cout << "PAST" << endl;
+	cout << endl << endl << endl << endl;
+
+
+
+
+
+	// test for type character
+	StaticArray<char, 33> char_array;
+	cout << "Test for char integer" << endl;
+
+	// Test for capacity 
+	cout << "\nTesting Array::capacity\n";
+	cout << "EXPECTED: 33\n";
+	cout << "ACTUAL: " << char_array.capacity() << endl;
+	assert(33 == char_array.capacity());
+	cout << "PAST" << endl;
+
+
+	// Test for the default constructor
+	cout << "\nTesting Array::Array\n" << endl;
+	for (int i = 0; i < char_array.capacity(); i++)
+	{
+		assert(char_array[i] == char());
+	}
+	cout << "PAST" << endl;
+
+
+
+	//Test for the setter function
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] setter\n";
+	char_array[23] = 'C';
+	char_array[11] = 'n';
+	cout << "Expected 'C' for char_array[23]" << endl;
+	cout << "ACTUAL: " << char_array[23] << endl;
+	assert('C' == char_array[23]);
+	cout << "PAST" << endl;
+
+
+	cout << "Expected 'n' for char_array[11]" << endl;
+	cout << "ACTUAL: " << char_array[11] << endl;
+	assert('n' == char_array[11]);
+	cout << "PAST" << endl;
+
+
+	char_array[-100] = '9';
+	cout << "Expected '9' for char_array[-100]" << endl;
+	cout << "ACTUAL: " << char_array[-100];
+	assert('9' == char_array[-100]);
+	cout << "PAST" << endl;
+
+
+	assert(char_array[-3] == '9');			//checks out-of-range uses dummy. 
+	cout << "PAST" << endl;
+	assert(char_array[33] == '9');			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(char_array[32] != '9');			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(char_array[0] != '9');				//checks lower end of range
+	cout << "PAST" << endl;
+
+
+	//Test for the getter function 
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] getter\n";
+	const StaticArray <char, 33> A_char = char_array;
+	for ( int i = 0; i < A_char.capacity(); i++)
+	{
+		assert(A_char[i] == char_array[i]);
+	}
+	cout << "PAST" << endl;
+
+
+	//Test for the const objct
+	const StaticArray <char, 33> C_char = char_array;
+	cout << "\nConst object test\n";
+	assert(C_char.capacity());
+	cout << "PAST" << endl;
+	assert(C_char[-1] == C_char[-1]);
+	cout << "PAST" << endl;
+	assert(C_char[0] == C_char[0]);
+	cout << "PAST" << endl;
+	cout << endl << endl << endl << endl;
+
+
+
+
+
+
+	// test for type double
+	StaticArray<double, 60> double_array;
+	cout << "Test for double integer" << endl;
+
+	// Test for capacity 
+	cout << "\nTesting Array::capacity\n";
+	cout << "EXPECTED: 60\n";
+	cout << "ACTUAL: " << double_array.capacity() << endl;
+	assert(60 == double_array.capacity());	
+	cout << "PAST" << endl;
+
+	// Test for the default constructor
+	cout << "\nTesting Array::Array\n";
+	for (int i = 0; i < double_array.capacity(); i++)
+	{
+		assert(double_array[i] == double());
+	}
+	cout << "PAST" << endl;
+
+	//Test for the setter function
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] setter\n";
+	double_array[20] = 31.9;
+	double_array[56] = 421.423;
+	cout << "Expected 31.9 for double_array[20]" << endl;
+	cout << "ACTUAL: " << double_array[20] << endl;
+	assert(31.9 == double_array[20]);
+	cout << "PAST" << endl;
+
+	cout << "Expected 421.423 for double_array[56]" << endl;
+	cout << "ACTUAL: " << double_array[56] << endl;
+	assert(421.423 == double_array[56]);
+	cout << "PAST" << endl;
+
+	double_array[200] = 456.4;
+	cout << "Expected 456.4 for double_array[200]" << endl;
+	cout << "ACTUAL: "<< double_array[200] << endl; 
+	assert(456.4 == double_array[200]);
+	cout << "PAST" << endl;
+
+	assert(double_array[-3] == 456.4);			//checks out-of-range uses dummy. 
+	cout << "PAST" << endl;
+	assert(double_array[60] == 456.4);			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(double_array[59] != 456.4);			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(double_array[0] != 456.4);				//checks lower end of range
+	cout << "PAST" << endl;
+
+
+	//Test for the getter function 
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] getter\n";
+	const StaticArray<double, 60> A_double = double_array;
+	for (int i = 0; i< A_double.capacity(); i++)
+	{
+		assert(A_double[i] == double_array[i]);
+	}
+	cout << "PAST" << endl;
+
+
+	//Test for the const objct
+	cout << "\nConst object test\n";
+	const StaticArray<double, 60> C_double = double_array;
+	assert(C_double.capacity());
+	cout << "PAST" << endl;
+	assert(C_double[-1] == C_double[-1]);
+	cout << "PAST" << endl;
+	assert(C_double[0] == C_double[0]);
+	cout << "PAST" << endl;
+	cout << endl << endl << endl << endl;
+
+
+
+
+
+
+
+
+	// test for type string
+	StaticArray<string, 50> string_array;
+	cout << "Test for string integer" << endl;
+
+	// Test for capacity 
+	cout << "\nTesting Array::capacity\n";
+	cout << "EXPECTED: 50\n";
+	cout << "ACTUAL: " << string_array.capacity() << endl;
+	assert(50 == string_array.capacity());		
+	cout << "PAST" << endl;
+
+	// Test for the default constructor
+	cout << "\nTesting Array::Array\n";
+	for (int i = 0; i < string_array.capacity(); i++)
+	{
+		assert(string_array[i] == string());
+	}
+	cout << "PAST" << endl;
+
+	//Test for the setter function
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] setter\n";
+	string_array[11] = "Hello, World!";
+	string_array[33] = "Good";
+
+	cout << "Expected 'Hello, World!' for string_array[11]" << endl;
+	cout << "ACTUAL: " << string_array[11] << endl;
+	assert("Hello, World!" == string_array[11]);
+	cout << "PAST" << endl;
+
+	cout << "Expected 'Good' for string_array[33]" << endl;
+	cout << "ACTUAL: " << string_array[33] << endl;
+	assert("Good" == string_array[33]);
+	cout << "PAST" << endl;
+
+	string_array[100] = "Out of range";
+	cout << "Expected 'Out of range' for string_array[100]" << endl;
+	cout << "ACTUAL: " << string_array[100] << endl;
+	assert("Out of range" == string_array[100]);
+	cout << "PAST" << endl;
+
+	assert(string_array[-3] == "Out of range");			//checks out-of-range uses dummy. 
+	cout << "PAST" << endl;
+	assert(string_array[50] == "Out of range");			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(string_array[49] != "Out of range");			//checks upper end of range
+	cout << "PAST" << endl;
+	assert(string_array[0] != "Out of range");				//checks lower end of range
+	cout << "PAST" << endl;
+
+	//Test for the getter function 
+	cout << "\nTesting StaticArray<V,CAP>::operator[ ] getter\n";
+	const StaticArray <string, 50> A = string_array;
+	for (int i = 0; i < A.capacity(); i++)
+	{
+		assert( A[i] == string_array[i]);
+	}
+	cout << "PAST" << endl;
+
+	//Test for the const objct
+	cout << "\nConst object test\n";
+	const StaticArray<string, 50> C_string = string_array;
+	assert(C_string.capacity());
+	cout << "PAST" << endl;
+	assert(C_string[-1] == C_string[-1]);
+	cout << "PAST" << endl;
+	assert(C_string[0] == C_string[0]);
+	cout << "PAST" << endl;
+	cout << endl << endl << endl << endl;
+
+
+
+
+	return 0;
+}
