@@ -1,0 +1,143 @@
+// Programmer: Rixiao Zhang
+
+
+#ifndef DYNAMICARRAY_H
+#define DYNAMICARRAY_H
+#include <algorithm>
+
+template <typename V >
+class DynamicArray
+{
+private:
+	V* value;
+	int CAP;
+	V dummy;
+
+
+public:
+	DynamicArray(int = 2);								// The default constructor 
+	DynamicArray(const DynamicArray<V>&); // The copy constructor
+	~DynamicArray() { delete[] value; }		// Destructor 
+	DynamicArray& operator= (const DynamicArray<V>&);// Assignment operator function
+	int capacity() const { return CAP; }
+	void capacity(int);
+	V operator[](int) const;
+	V& operator[](int);
+};
+
+
+template <typename V>
+DynamicArray<V>::DynamicArray(int capacity)
+{
+	dummy = V();
+
+	this->CAP = capacity;
+	value = new V[CAP];
+
+	for (int i = 0; i < CAP; i++)
+	{
+		value[i] = V();
+	}
+}
+
+
+template <typename V>
+DynamicArray<V>::DynamicArray(const DynamicArray<V>& original)
+{
+	dummy = original.dummy;
+
+	this->CAP = original.CAP;
+	value = new V[CAP];
+
+	for (int i = 0; i < CAP; i++)
+	{
+		value[i] = original.value[i];
+	}
+}
+
+
+
+template <typename V>
+DynamicArray<V>& DynamicArray<V>::operator= (const DynamicArray<V>& original)		// void!!!!
+{
+	if (this != &original)								// To make sure it is not a self copy.
+	{
+		delete[] value;
+
+		CAP = original.CAP;
+		value = new V[CAP];
+
+		for (int i = 0; i < CAP; i++)
+		{
+			value[i] = original.value[i];
+		}
+
+		dummy = original.dummy;
+	}
+
+	return *this;													// return a self reference
+}
+
+
+
+
+
+template<typename V>
+void DynamicArray<V>::capacity(int size)
+{
+	V* temp = new V[size];
+
+	int limit = min(size, this->CAP);
+
+	for (int i = 0; i < limit; i++)
+	{
+		temp[i] = value[i];
+	}
+
+	for (int i = limit; i < size; i++)
+	{
+		temp[i] = V();
+	}
+
+	delete[] value;
+
+	value = temp;
+
+	this->CAP = size;
+
+}
+
+
+template<typename V>
+V& DynamicArray<V>::operator[](int index)
+{
+	if (index < 0)
+	{
+		return dummy;
+	}
+	else if (index >= CAP)
+	{
+		capacity(2 * index);
+	}
+
+	return value[index];
+
+}
+
+template<typename V>
+V DynamicArray<V>::operator[](int index) const
+{
+	if (index < 0 || index >= CAP)
+	{
+		return V();
+	}
+
+	return value[index];
+}
+
+
+
+
+
+
+#endif
