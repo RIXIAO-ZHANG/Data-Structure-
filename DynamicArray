@@ -21,7 +21,7 @@ public:
 	DynamicArray& operator= (const DynamicArray<V>&);// Assignment operator function
 	int capacity() const { return CAP; }
 	void capacity(int);
-	V operator[](int) const;
+	const V& operator[](int) const;
 	V& operator[](int);
 };
 
@@ -125,7 +125,7 @@ V& DynamicArray<V>::operator[](int index)
 }
 
 template<typename V>
-V DynamicArray<V>::operator[](int index) const
+const V& DynamicArray<V>::operator[](int index) const				// Imporvement
 {
 	if (index < 0 || index >= CAP)
 	{
