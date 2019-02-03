@@ -1,0 +1,176 @@
+// Programmer: Rixiao Zhang 
+
+#include <iostream>
+
+using namespace std;
+
+#include "DynamicArray.h"
+#include "DynamicArray.h" // ifndef test
+#include <cassert>
+#include <string>
+
+int main()
+{
+	cout << "Programmer: Rixiao Zhang" << endl;
+
+	// type int testing 
+	cout << "Int DynamicArray Test:    " << endl;
+	cout << "--------------------------" << endl;
+
+	DynamicArray<int> the_numbers(1000);
+
+	cout << "Testing DynamicArray::capacity " << endl;
+	cout << "EXPECTED: 1000" << endl;
+	cout << "ACTUAL: " << the_numbers.capacity() << endl;
+	assert(the_numbers.capacity() == 1000);
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Testing DynamicArray::DynamicArray" << endl;
+	for ( int i = 0; i < the_numbers.capacity(); i++)
+	{
+		assert(the_numbers[i] == int());
+	}
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Testing the Array::operator[ ] setter" << endl;
+	the_numbers[7] = 520;
+	the_numbers[-2000] = 45678;
+	the_numbers[2000] = 2000;
+	cout << "EXPECTED: 520 for the_numbers[7]" << endl;
+	cout << "ACTUAL: " << the_numbers[7] << endl;
+	cout << "EXPECTED: 45678 for the_numbers[-2000](dummy)" << endl;
+	cout << "ACTUAL: " << the_numbers[-2000] << endl;
+	cout << "EXPECTED: the new capacity for the_numbers is 2*2000" << endl;
+	cout << "ACTUAL: " << the_numbers.capacity() << endl;
+	assert(the_numbers[7] == 520);
+	assert(the_numbers[-2000] == 45678);
+	assert(the_numbers.capacity() == 4000);
+	assert(the_numbers[-1] == 45678);
+	assert(the_numbers[0] != 45678);
+	assert(the_numbers[1999] != 45678);
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Testing the DynamicArray::operator [] getter " << endl;
+	const DynamicArray<int> getter_numbers = the_numbers;
+	for (int i = 0; i < getter_numbers.capacity(); i++)
+	{
+		assert(getter_numbers[i] == the_numbers[i]);
+	}
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Const object Test" << endl;
+	const DynamicArray<int> C_numbers(1000);
+	assert(C_numbers.capacity());
+	assert(C_numbers[-1] == C_numbers[-1]);
+	assert(C_numbers[0] == C_numbers[0]);
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Object Copy Test" << endl;
+	DynamicArray<int> copy_numbers(the_numbers);
+	assert(copy_numbers.capacity() == the_numbers.capacity());
+	for ( int i = 0; i < copy_numbers.capacity(); i++)
+	{
+		assert(copy_numbers[i] == the_numbers[i]);
+	}
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Object Assignment Test" << endl;
+	DynamicArray<int> assignment_numbers;
+	assignment_numbers = the_numbers;
+	assert(assignment_numbers.capacity() == the_numbers.capacity());
+	for (int i = 0; i < assignment_numbers.capacity(); i++)
+	{
+		assert(assignment_numbers[i] == the_numbers[i]);
+	}
+	cout << "Pass!" << endl << endl;
+	cout << endl << endl << endl  << endl << endl;
+
+
+
+
+
+
+	// type string testing 
+	cout << "String DynamicArray Test:    " << endl;
+	cout << "-----------------------------" << endl;
+	DynamicArray<string> string_array(100);
+
+	cout << "Testing DynamicArray::capacity " << endl;
+	cout << "EXPECTED: 100"<< endl;
+	cout << "ACTUAL: " << string_array.capacity() << endl;
+	assert(string_array.capacity() ==100);
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Testing DynamicArray::DynamicArray" << endl;
+	for (int i = 0; i < string_array.capacity(); i++)
+	{
+		assert(string_array[i] == string());
+	}
+	cout << "Pass!" << endl << endl;
+
+
+	cout << "Testing the DynamicArray::operator[] setter" << endl;
+	string_array[67] = "This is a test.";
+	string_array[-1000] = "dummy";
+	string_array[1000] = "Enlarge the size.";
+	cout << "EXPECTED: 'This is a test' for string_array[67]" << endl;
+	cout << "ACTUAL: " << string_array[67] << endl;
+	cout << "EXPECTED: 'dummy' for string_array[-1000](dummy)" << endl;
+	cout << "ACTUAL: " << string_array[-1000] << endl;
+	cout << "EXPECTED: the new capacity for string_array is 1000*2" << endl;
+	cout << "ACTUAL: " << string_array.capacity() << endl;
+	assert(string_array[67] == "This is a test.");
+	assert(string_array[-1000] == "dummy");
+	assert(string_array.capacity() == 2000);
+	assert(string_array[0] != "dummy");
+	assert(string_array[399] != "dummy");
+	cout << "Past!" << endl << endl;
+
+
+	cout << "Testing the DynamicArray::operator[] getter" << endl;
+	const DynamicArray<string> getter_string = string_array;
+	for (int i = 0; i < getter_string.capacity(); i++)
+	{
+		assert(getter_string[i] == string_array[i]);
+	}
+	cout << "Past!" << endl << endl;
+
+
+	cout << "Const Object Test" << endl;
+	const DynamicArray<string> C_string(100);
+	assert(C_string.capacity());
+	assert(C_string[-1] == C_string[-1]);
+	assert(C_string[0] == C_string[0]);
+	cout << "Past!" << endl << endl;
+
+
+	cout << "Object Copy Test" << endl;
+	DynamicArray<string> copy_string(string_array);
+	assert(copy_string.capacity() == string_array.capacity());
+	for (int i = 0; i < copy_string.capacity(); i++)
+	{
+		assert(copy_string[i] == string_array[i]);
+	}
+	cout << "Past!" << endl << endl;
+
+
+	cout << "Object Assignment Test" << endl;
+	DynamicArray<string> assignment_string;
+	assignment_string = string_array;
+	assert(assignment_string.capacity() == string_array.capacity());
+	for (int i = 0; i < assignment_string.capacity(); i++)
+	{
+		assert(assignment_string[i] == string_array[i]);
+	}
+
+	cout << "Past!" << endl << endl;
+
+	return 0;
+}
