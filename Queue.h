@@ -119,11 +119,14 @@ void Queue<V>::pop()
 		firstNode = firstNode->next;
 		delete temp;
 		siz--;
-		if (firstNode == nullptr) 
+		if (firstNode == nullptr)
 		{
 			lastNode = nullptr;
 		}
 	}
+
+
+
 }
 
 template <typename V>
